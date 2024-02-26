@@ -1,1 +1,42 @@
-H
+Instalar Java:
+sudo apt update && apt upgrade
+sudo apt install default-jre
+sudo apt install default-jdk
+javac -version
+
+-----------------------------------------------
+Levantamos el contenedor:
+docker-compose up -d
+En caso de tener fallos al levantar los contenedores, ejecutar el siguiente comando:
+echo 'vm.max_map_count=262144' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+El parámetro vm.max_map_count controla el número máximo de áreas de mapa de memoria que un proceso puede tener.
+
+-----------------------------------------------
+Usuario: admin
+Contraseña admin
+
+-----------------------------------------------
+Escanear nuestro proyecto:
+sudo mkdir  sonarscanner
+
+Dentro de la carpeta creada ejecutamos:
+Wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+
+Extraemos el scaner:
+unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+
+Elimine el archivo de archivo zip:
+rm -r sonar-scanner-cli-5.0.1.3006-linux.zip
+
+Añadirlo a las variables de entorno:
+nano ~/.bashrc
+Y añadimos lo siguiente en la última línea:
+export PATH=$PATH:/RUTA/AL/sonar-scanner-5.0.1.3006-linux/bin
+
+Aplicar los cambios:
+source ~/.bashrc
+
+Comprobar que se ha guardado:
+sonar-scanner -v
+-----------------------------------------------
